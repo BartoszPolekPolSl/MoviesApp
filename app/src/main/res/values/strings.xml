@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MoviesApp</string>
+    <string name="title">title</string>
+    <string name="author">author</string>
+    <string name="year">year</string>
+    <string name="director">director</string>
+    <string name="rating">rating</string>
+    <string name="save">SAVE</string>
+    <string name="watched">watched</string>
 </resources>
