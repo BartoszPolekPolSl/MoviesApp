@@ -4,8 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/rounded_button.xml" value="0.1405" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1203125" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21989593505859376" />
         <entry key="app/src/main/res/layout/add_movie.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/card_movie.xml" value="0.1203125" />
+        <entry key="app/src/main/res/layout/dialog_fragment_add_movie.xml" value="0.1734375" />
+        <entry key="app/src/main/res/layout/fragment_main.xml" value="0.1203125" />
+        <entry key="app/src/main/res/layout/main_view.xml" value="0.17239583333333333" />
         <entry key="app/src/main/res/layout/movie_card.xml" value="0.2578125" />
       </map>
     </option>
