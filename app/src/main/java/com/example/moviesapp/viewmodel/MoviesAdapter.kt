@@ -11,9 +11,11 @@ import com.example.moviesapp.MovieCardClickListener
 import com.example.moviesapp.databinding.CardMovieBinding
 import com.example.moviesapp.model.Movie
 
-class MoviesAdapter: ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(DiffCallback) {
+
+class MoviesAdapter: ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(DiffCallback){
 
     var listener : MovieCardClickListener? = null
+    var watchedStatus = false
 
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<Movie>() {
@@ -52,4 +54,30 @@ class MoviesAdapter: ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(DiffCallb
         holder.bind(getItem(position))
     }
 
+    fun getMovieById(position : Int) : Movie{
+        return currentList[position]
+    }
+
+
+
+    fun filterList(list: List<Movie>?) {
+        if(list!=null){
+            val filteredList = mutableListOf<Movie>()
+            if(watchedStatus){
+                for (movie in list!!) {
+                    if(movie.watched){
+                        filteredList.add(movie)
+                    }
+                }
+            }
+            else{
+                for (movie in list!!) {
+                    if(!movie.watched){
+                        filteredList.add(movie)
+                    }
+                }
+            }
+            submitList(filteredList)
+        }
+    }
 }

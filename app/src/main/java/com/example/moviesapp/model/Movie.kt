@@ -11,7 +11,7 @@ data class Movie (
     val director: String="",
     val year: Int=0,
     val rating: Int=0,
-    val watched: Boolean=false
+    var watched: Boolean=false
         )
 
 enum class WatchedOptions{

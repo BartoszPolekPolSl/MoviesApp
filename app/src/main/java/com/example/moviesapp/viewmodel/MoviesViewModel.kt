@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moviesapp.DB_URL
-import com.example.moviesapp.MovieCardClickListener
 import com.example.moviesapp.model.Movie
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
@@ -13,6 +12,10 @@ import com.google.firebase.ktx.Firebase
 class MoviesViewModel: ViewModel() {
 
     private val dbMovies = Firebase.database(DB_URL).getReference("movies")
+
+    private val _watchedFilterStatus : MutableLiveData<Boolean> = MutableLiveData(true)
+    val watchedFilterStatus : LiveData<Boolean>
+        get() = _watchedFilterStatus
 
     private val _moviesList = MutableLiveData<List<Movie>>()
     val moviesList : LiveData<List<Movie>>
@@ -24,7 +27,7 @@ class MoviesViewModel: ViewModel() {
             for (movieSnapshot in snapshot.children) {
                 val movie = movieSnapshot.getValue(Movie::class.java)
                 movie?.id = movieSnapshot.key
-                movie?.let { movies.add(it) }
+                movie?.let {movies.add(it)}
             }
             _moviesList.value = movies
         }
@@ -33,6 +36,10 @@ class MoviesViewModel: ViewModel() {
             TODO("Not yet implemented")
         }
 
+    }
+
+    fun changeFilterStatus(){
+        _watchedFilterStatus.value = !_watchedFilterStatus.value!!
     }
 
     fun getRealtimeUpdates(){
@@ -48,27 +55,20 @@ class MoviesViewModel: ViewModel() {
         dbMovies.child(movie.id!!).setValue(movie)
     }
 
-    fun deleteAuthor(movie: Movie) {
-        dbMovies.child(movie.id!!).removeValue()
-
+    fun changeWatched(movie: Movie){
+        if(movie.watched){
+            movie.watched=false
+            dbMovies.child(movie.id!!).setValue(movie)
+        }
+        else{
+            movie.watched=true
+            dbMovies.child(movie.id!!).setValue(movie)
+        }
     }
 
-    fun fetchAuthors() {
-        dbMovies.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onCancelled(error: DatabaseError) {}
+    fun deleteMovie(movie: Movie) {
+        dbMovies.child(movie.id!!).removeValue()
 
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    val movies = mutableListOf<Movie>()
-                    for (movieSnapshot in snapshot.children) {
-                        val movie = movieSnapshot.getValue(Movie::class.java)
-                        movie?.id = movieSnapshot.key
-                        movie?.let { movies.add(it) }
-                    }
-                    _moviesList.value = movies
-                }
-            }
-        })
     }
 
 
