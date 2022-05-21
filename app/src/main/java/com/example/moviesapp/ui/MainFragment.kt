@@ -70,10 +70,10 @@ class MainFragment : Fragment(), MovieCardClickListener {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 when(direction){
                     ItemTouchHelper.LEFT ->{
-                        viewModel.deleteMovie(moviesAdapter.getMovieById(viewHolder.bindingAdapterPosition))
+                        viewModel.deleteMovie(moviesAdapter.getMovieByRecyclerPosition(viewHolder.bindingAdapterPosition))
                     }
                     ItemTouchHelper.RIGHT ->{
-                        viewModel.changeWatched(moviesAdapter.getMovieById(viewHolder.bindingAdapterPosition))
+                        viewModel.changeWatched(moviesAdapter.getMovieByRecyclerPosition(viewHolder.bindingAdapterPosition))
                     }
                 }
             }

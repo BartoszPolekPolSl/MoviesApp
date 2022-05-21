@@ -54,7 +54,7 @@ class MoviesAdapter: ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(DiffCallb
         holder.bind(getItem(position))
     }
 
-    fun getMovieById(position : Int) : Movie{
+    fun getMovieByRecyclerPosition(position : Int) : Movie{
         return currentList[position]
     }
 

@@ -1,15 +1,10 @@
-package com.example.moviesapp
+package com.example.moviesapp.ui
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuInflater
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.example.moviesapp.databinding.ActivityMainBinding
-import com.example.moviesapp.model.Movie
-import com.example.moviesapp.viewmodel.MoviesViewModel
+import com.example.moviesapp.R
 
 class MainActivity : AppCompatActivity() {
 
