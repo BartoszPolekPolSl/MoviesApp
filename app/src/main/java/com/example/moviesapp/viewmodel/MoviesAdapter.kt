@@ -2,12 +2,18 @@ package com.example.moviesapp.viewmodel
 
 
 
+import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviesapp.MovieCardClickListener
+import com.example.moviesapp.R
 import com.example.moviesapp.databinding.CardMovieBinding
 import com.example.moviesapp.model.Movie
 
@@ -15,7 +21,6 @@ import com.example.moviesapp.model.Movie
 class MoviesAdapter: ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(DiffCallback){
 
     var listener : MovieCardClickListener? = null
-    var watchedStatus = false
 
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<Movie>() {
@@ -32,10 +37,17 @@ class MoviesAdapter: ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(DiffCallb
     inner class MovieViewHolder(private var binding: CardMovieBinding):
         RecyclerView.ViewHolder(binding.root){
         fun bind(movie: Movie){
+            if(movie.rating==null){
+                binding.ratingTxtView.text = ""
+                binding.starIcon.visibility = View.INVISIBLE
+            }
+            else{
+                binding.ratingTxtView.text = movie.rating.toString()
+            }
+
             binding.directorTxtView.text = movie.director
-            binding.ratingTxtView.text = movie.rating.toString()
             binding.titleTxtView.text = movie.title
-            binding.yearTxtView.text = movie.year.toString()
+            binding.yearTxtView.text = if(movie.year==null){""}else{movie.year.toString()}
             binding.movieCard.setOnClickListener{listener?.onMovieCardClick(movie)}
         }
     }
@@ -60,7 +72,7 @@ class MoviesAdapter: ListAdapter<Movie, MoviesAdapter.MovieViewHolder>(DiffCallb
 
 
 
-    fun filterList(list: List<Movie>?) {
+    fun filterList(list: List<Movie>?, watchedStatus: Boolean) {
         if(list!=null){
             val filteredList = mutableListOf<Movie>()
             if(watchedStatus){

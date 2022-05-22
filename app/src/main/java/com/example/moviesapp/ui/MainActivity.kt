@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.watched_switch, menu)
+        inflater.inflate(R.menu.top_menu, menu)
         return true
     }
 

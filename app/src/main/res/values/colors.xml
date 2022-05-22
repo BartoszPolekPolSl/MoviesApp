@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="deleteColor">#F11A1A</color>
     <color name="changeWatchedColor">#93EA30</color>
+    <color name="yellow">#F3DF31</color>
+    <color name="watched_movie_card">#E1E1E1</color>
 </resources>
